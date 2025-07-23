@@ -415,7 +415,8 @@ import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import './ChatifyPage.css';
 
-const socket = io('http://localhost:3001');
+const socket = io(import.meta.env.VITE_API_URL);
+
 
 export default function ChatifyPage() {
   const [roomList, setRoomList] = useState([]);
