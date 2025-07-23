@@ -803,6 +803,9 @@ export default function ChatifyPage() {
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && searchSongs()}
             className="input-field"
+            onClick={(e)=> e.stopPropagation()}
+             onMouseDown={(e) => e.stopPropagation()}
+  onTouchStart={(e) => e.stopPropagation()}
           />
           <button onClick={searchSongs} className="btn">Search</button>
         </div>
