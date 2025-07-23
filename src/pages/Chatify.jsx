@@ -415,7 +415,7 @@ import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import './ChatifyPage.css';
 
-const socket = io(import.meta.env.VITE_API_URL);
+const socket = io('https://chatify-backend-knkq.onrender.com');
 
 
 export default function ChatifyPage() {
