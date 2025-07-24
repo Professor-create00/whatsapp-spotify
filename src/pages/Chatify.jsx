@@ -416,11 +416,13 @@ export default function ChatifyPage() {
           ))}
         </ul>
       </aside>
-      <footer className="chatify-footer">
-        <div className="footer-content">
-          <span>Made with passion and caffeine by Lakhan Sharan</span>
-        </div>
-      </footer>
+        {!joined && (
+        <footer className="chatify-footer">
+          <div className="footer-content">
+            <span>🔥☕ Made with passion and caffeine by Lakhan Sharan</span>
+          </div>
+        </footer>
+      )}
     </div>
   );
 }
