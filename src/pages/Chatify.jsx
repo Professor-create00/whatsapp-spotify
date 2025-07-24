@@ -1,11 +1,8 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { io } from 'socket.io-client';
 import './ChatifyPage.css';
 
 const socket = io('https://chatify-backend-knkq.onrender.com');
-
 
 export default function ChatifyPage() {
   const [roomList, setRoomList] = useState([]);
@@ -28,10 +25,13 @@ export default function ChatifyPage() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [roomToDelete, setRoomToDelete] = useState('');
   const [deletePassword, setDeletePassword] = useState('');
-const [searchFocused, setSearchFocused] = useState(false);
+  const [searchFocused, setSearchFocused] = useState(false);
 
   useEffect(() => {
     const handleResize = () => {
+      // Don't close sidebars if search input is focused
+      if (searchFocused) return;
+      
       if (window.innerWidth <= 768) {
         setShowChatSidebar(false);
         setShowMusicSidebar(false);
@@ -82,7 +82,7 @@ const [searchFocused, setSearchFocused] = useState(false);
       socket.off('room_deleted');
       socket.off('receive_message', handleReceiveMessage);
     };
-  }, [room]);
+  }, [room, searchFocused]);
 
   const toggleChatSidebar = () => {
     setShowChatSidebar(!showChatSidebar);
@@ -92,6 +92,7 @@ const [searchFocused, setSearchFocused] = useState(false);
   };
 
   const toggleMusicSidebar = () => {
+    if (searchFocused) return; // Don't toggle if search is focused
     setShowMusicSidebar(!showMusicSidebar);
     if (window.innerWidth <= 768 && !showMusicSidebar) {
       setShowChatSidebar(false);
@@ -394,8 +395,14 @@ const [searchFocused, setSearchFocused] = useState(false);
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && searchSongs()}
             className="input-field"
-            onFocus={()=> setSearchFocused(true)}
-            onBlur={()=> setSearchFocused(false)}
+            onFocus={() => {
+              setSearchFocused(true);
+              // Ensure music sidebar stays open when searching
+              if (window.innerWidth <= 768) {
+                setShowMusicSidebar(true);
+              }
+            }}
+            onBlur={() => setSearchFocused(false)}
           />
           <button onClick={searchSongs} className="btn">Search</button>
         </div>
