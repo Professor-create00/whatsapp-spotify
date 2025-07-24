@@ -443,7 +443,32 @@ body, html {
 
 
 
+/* Footer Styles */
+.chatify-footer {
+  background-color: #1a1a1a;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
+  border-top: 1px solid #333;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+}
 
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .chatify-footer {
+    padding: 0.8rem;
+    font-size: 0.8rem;
+  }
+}
 
 .chatify-header {
   position: fixed;
