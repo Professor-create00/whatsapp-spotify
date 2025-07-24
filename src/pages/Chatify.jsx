@@ -303,8 +303,6 @@ export default function ChatifyPage() {
         <nav>
           <ul>
             <li className="active">Private Rooms</li>
-            <li>Friends</li>
-            <li style={{ fontWeight: 'bold' }}>Room List</li>
             {roomList.map((roomName, i) => (
               <li key={i} className="room-list-item">
                 <span onClick={() => setRoom(roomName)}>{roomName}</span>
